@@ -122,6 +122,7 @@
         }
         .tags {
           direction: ltr;
+          flex-direction: column;
           span {
             display: inline-block;
             border-radius: 3px;
@@ -140,6 +141,8 @@
           display: inline-block;
           direction: ltr;
           margin-right: 10px;
+          position: absolute;
+          left: 0;
         }
         .insert-preview {
           position: absolute;
@@ -153,8 +156,8 @@
         }
         .show {
           background: #7ad5ff;
-          pointer-events: none;  // 不加会识别为不可移动
-          opacity: .7
+          pointer-events: none; // 不加会识别为不可移动
+          opacity: 0.7;
         }
         .in {
           height: 100%;
@@ -167,11 +170,14 @@
       }
       epd {
         position: absolute;
-        height: 12px;
-        width: 12px;
-        line-height: 12px;
-        text-align: center;
+        font-size: 12px;
+        height: 15px;
+        width: 15px;
+        line-height: 15px;
         border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         border: 1px solid #4f4f4f;
         background-color: #fff;
         pointer-events: all;

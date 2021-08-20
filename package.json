@@ -1,6 +1,6 @@
 {
-  "name": "mind-elixir",
-  "version": "0.15.0",
+  "name": "alps-mind-elixir",
+  "version": "1.0.8",
   "description": "Mind elixir is a free open source mind map core.",
   "main": "dist/MindElixir.js",
   "scripts": {
@@ -8,8 +8,8 @@
     "lite": "webpack --mode production --env.lite=1",
     "test": "jest --runInBand",
     "build": "webpack --mode production --env.lite=0",
-    "doc": "./node_modules/.bin/jsdoc src/ -R readme.md -c conf.json",
-    "md": "./node_modules/.bin/jsdoc2md 'src/*.js' > api.md",
+    "doc": "jsdoc src/ -R readme.md -c conf.json",
+    "md": "jsdoc2md 'src/*.js' > api.md",
     "publish2": "npm run build && npm version patch -m \"build: release %s\" && npm publish",
     "beta": "npm run build && npm publish --tag beta"
   },
@@ -19,7 +19,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/ssshooter/mind-elixir-core"
+    "url": "git+https://github.com/ssshooter/mind-elixir-core.git"
   },
   "homepage": "https://mindelixir.ink/",
   "author": "",
@@ -49,5 +49,11 @@
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.3.2",
     "webpack-dev-server": "^3.5.1"
+  },
+  "bugs": {
+    "url": "https://github.com/ssshooter/mind-elixir-core/issues"
+  },
+  "directories": {
+    "doc": "doc"
   }
 }

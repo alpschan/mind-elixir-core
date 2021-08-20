@@ -4,23 +4,65 @@ import { exportSvg, exportPng } from '../painter/index'
 let mind = new MindElixir({
   el: '#map',
   newTopicName: '子节点',
-  direction: MindElixir.LEFT,
+  direction: MindElixir.SIDE,
   // direction: MindElixir.RIGHT,
-  data: MindElixir.new('new topic'),
-  // data: MindElixir.example,
-  locale: 'en',
+  //   data: MindElixir.new('new topic'),
+  data: MindElixir.example2,
   draggable: true,
   editable: true,
   contextMenu: true,
   contextMenuOption: {
-    focus: true,
-    link: true,
+    type: 'tag',
     extend: [
       {
-        name: 'Node edit',
-        onclick: () => {
-          alert('extend menu')
-        },
+        name: '创建分组',
+        type: 'add-folder',
+        onclick: () => {},
+      },
+      {
+        name: '创建子分组',
+        type: 'add-children-folder',
+        onclick: () => {},
+      },
+      {
+        name: '创建子实体',
+        type: 'add-children-entity',
+        onclick: () => {},
+      },
+      {
+        name: '进入当前节点',
+        type: 'enter-node',
+        onclick: () => {},
+      },
+      {
+        name: '退出当前节点',
+        type: 'exit-node',
+        onclick: () => {},
+      },
+      {
+        name: '编辑实体',
+        type: 'edit-entity',
+        onclick: () => console.log('精髓'),
+      },
+      {
+        name: '创建实体',
+        type: 'add-entity',
+        onclick: () => {},
+      },
+      {
+        name: '删除',
+        type: 'remove',
+        onclick: () => {},
+      },
+      {
+        name: '上移',
+        type: 'move-up',
+        onclick: () => {},
+      },
+      {
+        name: '下移',
+        type: 'move-down',
+        onclick: () => {},
       },
     ],
   },
@@ -29,7 +71,7 @@ let mind = new MindElixir({
   keypress: true,
   allowUndo: false,
   before: {
-    moveDownNode(){
+    moveDownNode() {
       return false
     },
     insertSibling(el, obj) {

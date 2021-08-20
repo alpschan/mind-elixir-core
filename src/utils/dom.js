@@ -13,7 +13,7 @@ export let createGroup = function (node) {
   let top = createTop(node)
   grp.appendChild(top)
   if (node.children && node.children.length > 0) {
-    top.appendChild(createExpander(node.expanded))
+    top.appendChild(createExpander(node))
     if (node.expanded !== false) {
       let children = createChildren(node.children)
       grp.appendChild(children)
@@ -24,11 +24,8 @@ export let createGroup = function (node) {
 
 let shapeTpc = function (tpc, nodeObj) {
   // TODO allow to add online image
-  if (nodeObj.style) {
-    tpc.style.color = nodeObj.style.color
-    tpc.style.background = nodeObj.style.background
-    tpc.style.fontSize = nodeObj.style.fontSize + 'px'
-    tpc.style.fontWeight = nodeObj.style.fontWeight || 'normal'
+  if (nodeObj.type === 'folder' || nodeObj.type === 'entity') {
+    tpc.style.paddingLeft = '30px'
   }
   if (nodeObj.icons) {
     let iconsContainer = $d.createElement('span')
@@ -37,6 +34,12 @@ let shapeTpc = function (tpc, nodeObj) {
       .map(icon => `<span>${icon}</span>`)
       .join('')
     tpc.appendChild(iconsContainer)
+  }
+  if (nodeObj.style) {
+    tpc.style.color = nodeObj.style.color
+    tpc.style.background = nodeObj.style.background
+    tpc.style.fontSize = nodeObj.style.fontSize + 'px'
+    tpc.style.fontWeight = nodeObj.style.fontWeight || 'normal'
   }
   if (nodeObj.tags) {
     let tagsContainer = $d.createElement('div')
@@ -134,12 +137,17 @@ export function createInputDiv(tpc) {
   console.timeEnd('createInputDiv')
 }
 
-export let createExpander = function (expanded) {
+export let createExpander = function (node) {
   let expander = $d.createElement('epd')
   // 包含未定义 expanded 的情况，未定义视为展开
-  expander.innerHTML = expanded !== false ? '-' : '+'
-  expander.expanded = expanded !== false ? true : false
-  expander.className = expanded !== false ? 'minus' : ''
+  expander.innerHTML =
+    node.expanded !== false
+      ? '-'
+      : node.children.length < 99
+      ? node.children.length
+      : '99+'
+  expander.expanded = node.expanded !== false ? true : false
+  expander.className = node.expanded !== false ? 'minus' : ''
   return expander
 }
 
@@ -174,7 +182,7 @@ export function createChildren(data, first, direction) {
     }
     let top = createTop(nodeObj)
     if (nodeObj.children && nodeObj.children.length > 0) {
-      top.appendChild(createExpander(nodeObj.expanded))
+      top.appendChild(createExpander(nodeObj))
       grp.appendChild(top)
       if (nodeObj.expanded !== false) {
         let children = createChildren(nodeObj.children)
