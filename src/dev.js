@@ -12,41 +12,16 @@ let mind = new MindElixir({
   editable: true,
   contextMenu: true,
   contextMenuOption: {
-    type: 'tag',
+    type: 'category',
     extend: [
       {
-        name: '创建分组',
-        type: 'add-folder',
+        name: '进入标签类',
+        type: 'enter-category',
         onclick: () => {},
       },
       {
-        name: '创建子分组',
-        type: 'add-children-folder',
-        onclick: () => {},
-      },
-      {
-        name: '创建子实体',
-        type: 'add-children-entity',
-        onclick: () => {},
-      },
-      {
-        name: '进入当前节点',
-        type: 'enter-node',
-        onclick: () => {},
-      },
-      {
-        name: '退出当前节点',
-        type: 'exit-node',
-        onclick: () => {},
-      },
-      {
-        name: '编辑实体',
-        type: 'edit-entity',
-        onclick: () => console.log('精髓'),
-      },
-      {
-        name: '创建实体',
-        type: 'add-entity',
+        name: '创建标签类',
+        type: 'add-category',
         onclick: () => {},
       },
       {

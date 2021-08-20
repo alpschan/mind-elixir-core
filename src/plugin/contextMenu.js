@@ -34,7 +34,6 @@ export default function (mind, option) {
     // console.log(e.pageY, e.screenY, e.clientY)
     let target = e.target
     if (isTag) {
-      console.dir(target)
       const { nodeObj } = target
       const addFolder = document.getElementById('add-folder')
       const addChildrenFolder = document.getElementById('add-children-folder')
@@ -92,26 +91,26 @@ export default function (mind, option) {
         moveDown.className = ''
       }
     } else {
+      const { nodeObj } = target
+      const enterCategory = document.getElementById('enter-category')
+      const addCategory = document.getElementById('add-category')
+      const remove = document.getElementById('remove')
+      const moveUp = document.getElementById('move-up')
+      const moveDown = document.getElementById('move-down')
+      if (nodeObj.type === 'root') {
+        enterCategory.className = 'disabled'
+        addCategory.className = ''
+        remove.className = 'disabled'
+        moveUp.className = 'disabled'
+        moveDown.className = 'disabled'
+      } else {
+        enterCategory.className = ''
+        addCategory.className = 'disabled'
+        remove.className = ''
+        moveUp.className = ''
+        moveDown.className = ''
+      }
     }
-    // if (target.tagName === 'TPC') {
-    //   if (target.parentElement.tagName === 'ROOT') {
-    //     isRoot = true
-    //   } else {
-    //     isRoot = false
-    //   }
-    //   if (isRoot) {
-    //     focus.className = 'disabled'
-    //     up.className = 'disabled'
-    //     down.className = 'disabled'
-    //     add_sibling.className = 'disabled'
-    //     remove_child.className = 'disabled'
-    //   } else {
-    //     focus.className = ''
-    //     up.className = ''
-    //     down.className = ''
-    //     add_sibling.className = ''
-    //     remove_child.className = ''
-    //   }
     mind.selectNode(target)
     menuContainer.hidden = false
     let height = menuUl.offsetHeight
@@ -136,62 +135,4 @@ export default function (mind, option) {
   menuContainer.onclick = e => {
     if (e.target === menuContainer) menuContainer.hidden = true
   }
-
-  //   add_child.onclick = e => {
-  //     mind.addChild()
-  //     menuContainer.hidden = true
-  //   }
-  //   add_sibling.onclick = e => {
-  //     if (isRoot) return
-  //     mind.insertSibling()
-  //     menuContainer.hidden = true
-  //   }
-  //   remove_child.onclick = e => {
-  //     if (isRoot) return
-  //     mind.removeNode()
-  //     menuContainer.hidden = true
-  //   }
-  //   focus.onclick = e => {
-  //     if (isRoot) return
-  //     mind.focusNode(mind.currentNode)
-  //     menuContainer.hidden = true
-  //   }
-  //   unfocus.onclick = e => {
-  //     mind.cancelFocus()
-  //     menuContainer.hidden = true
-  //   }
-  //   up.onclick = e => {
-  //     if (isRoot) return
-  //     mind.moveUpNode()
-  //     menuContainer.hidden = true
-  //   }
-  //   down.onclick = e => {
-  //     if (isRoot) return
-  //     mind.moveDownNode()
-  //     menuContainer.hidden = true
-  //   }
-  //   link.onclick = e => {
-  //     menuContainer.hidden = true
-  //     let from = mind.currentNode
-  //     let tips = createTips(i18n[locale].clickTips)
-  //     m.container.appendChild(tips)
-  //     mind.map.addEventListener(
-  //       'click',
-  //       e => {
-  //         e.preventDefault()
-  //         tips.remove()
-  //         if (
-  //           e.target.parentElement.nodeName === 'T' ||
-  //           e.target.parentElement.nodeName === 'ROOT'
-  //         ) {
-  //           mind.createLink(from, mind.currentNode)
-  //         } else {
-  //           console.log('取消连接')
-  //         }
-  //       },
-  //       {
-  //         once: true,
-  //       }
-  //     )
-  //   }
 }
