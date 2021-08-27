@@ -2,9 +2,9 @@ let $d = document
 export let createMainPath = function (d) {
   let path = $d.createElementNS('http://www.w3.org/2000/svg', 'path')
   path.setAttribute('d', d)
-  path.setAttribute('stroke', '#666')
+  path.setAttribute('stroke', 'rgba(0,0,0,0.25)')
   path.setAttribute('fill', 'none')
-  path.setAttribute('stroke-width', '2')
+  path.setAttribute('stroke-width', '1.5')
   return path
 }
 
@@ -20,16 +20,16 @@ export let createLine = function (x1, y1, x2, y2) {
   line.setAttribute('y1', y1)
   line.setAttribute('x2', x2)
   line.setAttribute('y2', y2)
-  line.setAttribute('stroke', '#bbb')
+  line.setAttribute('stroke', '#ccc')
   line.setAttribute('fill', 'none')
-  line.setAttribute('stroke-width', '2')
+  line.setAttribute('stroke-width', '1')
   return line
 }
 
 export let createPath = function (d) {
   let path = $d.createElementNS('http://www.w3.org/2000/svg', 'path')
   path.setAttribute('d', d)
-  path.setAttribute('stroke', '#555')
+  path.setAttribute('stroke', '#d9d9d9')
   path.setAttribute('fill', 'none')
   path.setAttribute('stroke-linecap', 'square')
   path.setAttribute('stroke-width', '1')
