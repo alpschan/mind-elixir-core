@@ -30,8 +30,6 @@ export default function (mind, option) {
   let isTag = option.type === 'tag'
   mind.container.oncontextmenu = function (e) {
     e.preventDefault()
-
-    // console.log(e.pageY, e.screenY, e.clientY)
     let target = e.target
     if (isTag) {
       const { nodeObj } = target

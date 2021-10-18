@@ -30,6 +30,10 @@ export let selectNode = function (targetElement, isNewNode) {
   console.timeEnd('selectNode')
 }
 export let unselectNode = function () {
+  let menuContainer = document.getElementsByTagName('cmenu')
+  if (menuContainer) {
+    menuContainer[0].hidden = true
+  }
   if (this.currentNode) {
     this.currentNode.className = ''
   }
@@ -94,8 +98,8 @@ export let selectFirstChild = function () {
 export let selectParent = function () {
   if (!this.currentNode || this.currentNode.dataset.nodeid === 'meroot') return
 
-  let parent = this.currentNode.parentElement.parentElement.parentElement
-    .previousSibling
+  let parent =
+    this.currentNode.parentElement.parentElement.parentElement.previousSibling
   if (parent) {
     let target = parent.firstChild
     this.selectNode(target)
