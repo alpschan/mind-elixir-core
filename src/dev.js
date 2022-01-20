@@ -12,32 +12,89 @@ let mind = new MindElixir({
   editable: true,
   contextMenu: true,
   contextMenuOption: {
-    type: 'category',
+    type: 'tag',
     extend: [
+      //   {
+      //     name: '创建同级分组',
+      //     type: 'add-folder',
+      //     onclick: () => {
+      //       const { id } = mind.currentNode.nodeObj
+      //       groupRef.current.create('folder', id, '新的分组', 'sameLevel')
+      //     },
+      //     disabled: true,
+      //   },
+      //   {
+      //     name: '创建子分组',
+      //     type: 'add-children-folder',
+      //     onclick: () => {
+      //       const { id } = mind.currentNode.nodeObj
+      //       groupRef.current.create('folder', id, '新的分组', 'nextLevel')
+      //     },
+      //   },
       {
-        name: '进入标签类',
-        type: 'enter-category',
-        onclick: () => {},
+        name: '创建子实体',
+        type: 'add-children-entity',
+        onclick: () => {
+          const { id } = mind.currentNode.nodeObj
+          groupRef.current.create('entity', id, '新的实体', 'nextLevel')
+        },
       },
       {
-        name: '创建标签类',
-        type: 'add-category',
-        onclick: () => {},
+        name: '进入当前节点',
+        type: 'enter-node',
+        onclick: () => mind.focusNode(mind.currentNode),
+      },
+      {
+        name: '退出当前节点',
+        type: 'exit-node',
+        onclick: () => mind.cancelFocus(),
+      },
+      {
+        name: '编辑实体',
+        type: 'edit-entity',
+        onclick: () =>
+          navigate(`entity?categoryType=${mind.currentNode.nodeObj.id}`),
+      },
+      {
+        name: '创建同级实体',
+        type: 'add-entity',
+        onclick: () => {
+          const { id } = mind.currentNode.nodeObj
+          groupRef.current.create('entity', id, '新的实体', 'sameLevel')
+        },
       },
       {
         name: '删除',
         type: 'remove',
-        onclick: () => {},
+        onclick: () => {
+          groupRef.current.remove(mind.currentNode.nodeObj.id)
+        },
       },
       {
         name: '上移',
         type: 'move-up',
-        onclick: () => {},
+        onclick: () => {
+          const { id, parent } = mind.currentNode.nodeObj
+          const idx = findIndex(x => x.id === id, parent.children)
+          if (idx === 0) {
+            message.warn('无法上移在最顶部的节点')
+            return
+          }
+          groupRef.current.moveUp(id, parent.children[idx - 1].id)
+        },
       },
       {
         name: '下移',
         type: 'move-down',
-        onclick: () => {},
+        onclick: () => {
+          const { id, parent } = mind.currentNode.nodeObj
+          const idx = findIndex(x => x.id === id, parent.children)
+          if (idx === parent.children.length - 1) {
+            message.warn('无法下移在最底部的节点')
+            return
+          }
+          groupRef.current.moveDown(id, parent.children[idx + 1].id)
+        },
       },
     ],
   },

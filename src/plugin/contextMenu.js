@@ -33,16 +33,18 @@ export default function (mind, option) {
     let target = e.target
     if (isTag) {
       const { nodeObj } = target
-      const addFolder = document.getElementById('add-folder')
-      const addChildrenFolder = document.getElementById('add-children-folder')
-      const addChildrenEntity = document.getElementById('add-children-entity')
-      const enterNode = document.getElementById('enter-node')
-      const exitNode = document.getElementById('exit-node')
-      const editEntity = document.getElementById('edit-entity')
-      const addEntity = document.getElementById('add-entity')
-      const remove = document.getElementById('remove')
-      const moveUp = document.getElementById('move-up')
-      const moveDown = document.getElementById('move-down')
+      const addFolder = document.getElementById('add-folder') || {}
+      const addChildrenFolder =
+        document.getElementById('add-children-folder') || {}
+      const addChildrenEntity =
+        document.getElementById('add-children-entity') || {}
+      const enterNode = document.getElementById('enter-node') || {}
+      const exitNode = document.getElementById('exit-node') || {}
+      const editEntity = document.getElementById('edit-entity') || {}
+      const addEntity = document.getElementById('add-entity') || {}
+      const remove = document.getElementById('remove') || {}
+      const moveUp = document.getElementById('move-up') || {}
+      const moveDown = document.getElementById('move-down') || {}
       if (nodeObj.type === 'root') {
         addFolder.className = 'disabled'
         addChildrenFolder.className = 'disabled'
